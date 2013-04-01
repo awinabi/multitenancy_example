@@ -1,25 +1,20 @@
-<h1>Listing posts</h1>
+<%= render "admin/shared/header" %>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Body</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= post.title %></td>
-    <td><%= post.body %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
+<div id="maincontent">
+<%= link_to "+ New Post", new_admin_post_path, :class => 'button'%> 
 <br />
+<br />
+<% if @posts.empty? %>
+  <b>Oops! no posts by the author yet!</b>
+<% else %>
+  <% @posts.each do |post| %>
+    <div class="post">
+      <b><%= post.title %></b>
+      <p><%= post.body %></p>
+      <p><%= link_to 'View Post', post, :target => "_blank"%> | <%= link_to 'Edit', edit_admin_post_path(post) %> | <%= link_to 'Destroy', admin_post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    </div>
+  <% end %>
+<% end %>
 
-<%= link_to 'New Post', new_post_path %>
+</div>
+

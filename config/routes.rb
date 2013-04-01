@@ -1,13 +1,15 @@
 MultitenancyExample::Application.routes.draw do
-  get "static/index"
 
   devise_for :users
 
   resources :comments
-  resources :posts
+  resources :blogs, :only => [:index, :show]
+  resources :posts, :only => [:index, :show]
   
   namespace :admin do
-    resources :posts, :comments
+    resources :posts, :except => :show
+    get "settings", :to => 'settings#edit', :as => "edit_settings"
+    put "settings", :to => 'settings#update', :as => "update_settings"
   end
 
   # The priority is based upon order of creation:

@@ -1,11 +1,9 @@
-<div id='header'>
-<h1>Welcome to ~Victoria</h1>
-<p>a simple blog engine</p>
-</div>
+<div id="maincontent">
 <% if current_user %>
-<p><%= link_to "Go to dashboard", admin_posts_path %></p>
-<p><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></p>
+  <p><%= link_to "Go to dashboard", admin_posts_path %></p>
+  <p><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></p>
 <% else %>
-<p><%= link_to "Sign In", new_user_session_path %></p>
-<p><%= link_to "Sign Up"  , new_user_registration_path %></p>
+  <p><%= link_to "Sign In", new_user_session_path %></p>
+  <p><%= link_to "Sign Up"  , new_user_registration_path %></p>
 <% end %>
+</div>

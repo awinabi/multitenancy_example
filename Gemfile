@@ -21,6 +21,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem "nested_form"
+
 gem 'milia'
 gem 'devise'
 

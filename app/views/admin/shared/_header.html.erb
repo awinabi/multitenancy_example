@@ -1,0 +1,10 @@
+<div>
+  <div id='headeractions' >
+    <b style="font-size: small;">[admin mode]</b>&nbsp;&nbsp;&nbsp;
+    <%= link_to "Manage Posts", admin_posts_path, :class => "#{admin_posts_active_css}" %> | 
+    <%= link_to "Settings", admin_edit_settings_path, :class => "#{admin_settings_active_css}" %>
+    <% if current_user %>
+    | <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+    <% end %>
+  </div>
+</div>
