@@ -1,6 +1,8 @@
 MultitenancyExample::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users do
+    post  "users" => "devise/custom/registrations#create"
+  end
 
   resources :comments
   resources :blogs, :only => [:index, :show]
