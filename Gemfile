@@ -40,3 +40,6 @@ gem 'devise'
 
 # To use debugger
 # gem 'debugger'
+group :production do
+  gem 'pg'
+end
