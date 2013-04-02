@@ -11,21 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130402092533) do
+ActiveRecord::Schema.define(:version => 20130402093352) do
 
   create_table "blogs", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
+    t.integer  "tenant_id"
   end
+
+  add_index "blogs", ["tenant_id"], :name => "index_blogs_on_tenant_id"
 
   create_table "comments", :force => true do |t|
     t.text     "body"
     t.integer  "post_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "tenant_id"
   end
+
+  add_index "comments", ["tenant_id"], :name => "index_comments_on_tenant_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title"
@@ -33,7 +39,10 @@ ActiveRecord::Schema.define(:version => 20130402092533) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "blog_id"
+    t.integer  "tenant_id"
   end
+
+  add_index "posts", ["tenant_id"], :name => "index_posts_on_tenant_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -44,6 +53,23 @@ ActiveRecord::Schema.define(:version => 20130402092533) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "tenants", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "tenant_id"
+  end
+
+  add_index "tenants", ["tenant_id"], :name => "index_tenants_on_tenant_id"
+
+  create_table "tenants_users", :id => false, :force => true do |t|
+    t.integer "tenant_id"
+    t.integer "user_id"
+  end
+
+  add_index "tenants_users", ["tenant_id"], :name => "index_tenants_users_on_tenant_id"
+  add_index "tenants_users", ["user_id"], :name => "index_tenants_users_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -61,9 +87,11 @@ ActiveRecord::Schema.define(:version => 20130402092533) do
     t.string   "twitter_url"
     t.string   "github_url"
     t.string   "name"
+    t.integer  "tenant_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["tenant_id"], :name => "index_users_on_tenant_id"
 
 end
