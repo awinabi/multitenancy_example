@@ -71,3 +71,12 @@
   border-top: 1px dashed #DDD;
   padding: 8px 0px;
 }
+
+#admin{
+  color: red;
+  font-size: small;
+}
+#admin a{
+  color: red;
+  font-size: small;
+}

@@ -10,11 +10,7 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @blog }
-    end
+    redirect_to blog_posts_path(@blog)
   end
 
   def new

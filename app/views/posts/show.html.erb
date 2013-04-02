@@ -1,15 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div>
+  <div id='headeractions' >
+    <div>
+      <b style="font-size: 14px;"><%= @blog.name %></b>
+    </div>
+    <div>
+      <b style="font-size: small;">[by <%= @blog.user.name || 'anonymous' %>]</b>&nbsp;&nbsp;&nbsp;
+      <%= link_to "All Posts", blog_posts_path(@blog) %> &nbsp;&nbsp;&nbsp;
+      <% unless @blog.user.github_url.blank? %>
+        <%= link_to "github", "#{@blog.user.github_url}" %> &nbsp;&nbsp;&nbsp;
+      <% end %>
+      <% unless @blog.user.github_url.blank? %>
+        <%= link_to "twitter", "#{@blog.user.twitter_url}" %> &nbsp;&nbsp;&nbsp;
+      <% end %>
+      <% if current_user %>
+        <b id="admin">[<%= link_to "Your Admin Dashboard", admin_posts_path %>]</b>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
 
-<p>
-  <b>Body:</b>
-  <%= @post.body %>
-</p>
+<div id="maincontent">
+  <h3><%= @post.title %></h3>
+  <p style="font-size: small; color: #898989; ">updated on <%= @post.created_at.to_s %></p>
+  <br />
 
+  <p>
+    <%= @post.body %>
+  </p>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+</div>

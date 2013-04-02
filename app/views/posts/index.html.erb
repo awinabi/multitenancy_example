@@ -1,25 +1,35 @@
-<h1>Listing posts</h1>
+<div>
+  <div id='headeractions' >
+    <div>
+      <b style="font-size: 14px;"><%= @blog.name %></b>
+    </div>
+    <div>
+      <b style="font-size: small;">[by <%= @blog.user.name || 'anonymous' %>]</b>&nbsp;&nbsp;&nbsp;
+      <%= link_to "All Posts", blog_posts_path(@blog) %> &nbsp;&nbsp;&nbsp;
+      <% unless @blog.user.github_url.blank? %>
+        <%= link_to "github", "#{@blog.user.github_url}" %> &nbsp;&nbsp;&nbsp;
+      <% end %>
+      <% unless @blog.user.github_url.blank? %>
+        <%= link_to "twitter", "#{@blog.user.twitter_url}" %> &nbsp;&nbsp;&nbsp;
+      <% end %>
+      <% if current_user %>
+        <b id="admin">[<%= link_to "Your Admin Dashboard", admin_posts_path %>]</b>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Body</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= post.title %></td>
-    <td><%= post.body %></td>
-    <td><%= link_to 'Show', post %></td>
-    <td><%= link_to 'Edit', edit_post_path(post) %></td>
-    <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Post', new_post_path %>
+<div id="maincontent">
+  <% unless @posts.empty? %>
+    <% @posts.each do |post| %>
+    <div class="post">
+      <h3><%= link_to post.title, blog_post_path(@blog, post) %></h3>
+      <p style="font-size: small; color: #898989; ">updated on <%= post.created_at.to_s %></p>
+      <br />
+    </div>
+    <% end %>
+  <% else %>
+  <b>Oops! no posts found! </b>
+  <% end %>
+</div>

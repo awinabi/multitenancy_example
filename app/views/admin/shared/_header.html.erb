@@ -1,7 +1,7 @@
 <div>
   <div id='headeractions' >
     <b style="font-size: small;">Welcome! <%= current_user.name || current_user.email %></b>&nbsp;&nbsp;&nbsp;
-    <b style="font-size: small; color: red;">[admin mode]</b>&nbsp;&nbsp;&nbsp;
+    <b id="admin">[admin mode]</b>&nbsp;&nbsp;&nbsp;
     <%= link_to "Manage Posts", admin_posts_path, :class => "#{admin_posts_active_css}" %> | 
     <%= link_to "Settings", admin_edit_settings_path, :class => "#{admin_settings_active_css}" %>
     <% if current_user %>
