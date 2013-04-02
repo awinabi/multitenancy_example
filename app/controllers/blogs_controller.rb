@@ -1,6 +1,4 @@
 class BlogsController < ApplicationController
-  # GET /blogs
-  # GET /blogs.json
   def index
     @blogs = Blog.all
 
@@ -10,8 +8,6 @@ class BlogsController < ApplicationController
     end
   end
 
-  # GET /blogs/1
-  # GET /blogs/1.json
   def show
     @blog = Blog.find(params[:id])
 
@@ -21,8 +17,6 @@ class BlogsController < ApplicationController
     end
   end
 
-  # GET /blogs/new
-  # GET /blogs/new.json
   def new
     @blog = Blog.new
 
@@ -32,13 +26,10 @@ class BlogsController < ApplicationController
     end
   end
 
-  # GET /blogs/1/edit
   def edit
     @blog = Blog.find(params[:id])
   end
 
-  # POST /blogs
-  # POST /blogs.json
   def create
     @blog = Blog.new(params[:blog])
 
@@ -53,8 +44,6 @@ class BlogsController < ApplicationController
     end
   end
 
-  # PUT /blogs/1
-  # PUT /blogs/1.json
   def update
     @blog = Blog.find(params[:id])
 
@@ -69,8 +58,6 @@ class BlogsController < ApplicationController
     end
   end
 
-  # DELETE /blogs/1
-  # DELETE /blogs/1.json
   def destroy
     @blog = Blog.find(params[:id])
     @blog.destroy

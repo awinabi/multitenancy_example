@@ -4,7 +4,10 @@ MultitenancyExample::Application.routes.draw do
 
   resources :comments
   resources :blogs, :only => [:index, :show]
-  resources :posts, :only => [:index, :show]
+
+  resources :blogs do
+    resources :posts, :only => [:index, :show]
+  end
   
   namespace :admin do
     resources :posts, :except => :show
