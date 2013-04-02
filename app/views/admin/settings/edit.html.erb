@@ -1,5 +1,45 @@
 <%= render "admin/shared/header" %>
 
 <div id="maincontent">
-  <h4>blog settings</h4>
+  <b>Blog Settings</b>
+  <br/><br/>
+
+  <%= nested_form_for @user, :url => admin_update_settings_path  do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this blog settings from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.hidden_field :id, :value => @user.id %>
+    <%= f.fields_for :blog do |blog_form| %>
+      <div class="field">
+        <%= blog_form.label :blog_name %><br />
+        <%= blog_form.text_field :name %>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :your_name %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :twitter_url %><br />
+      <%= f.text_field :twitter_url %>
+    </div>
+    <div class="field">
+      <%= f.label :github_url %><br />
+      <%= f.text_field :github_url %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %> or <%= link_to "Cancel", admin_posts_path %>
+    </div>
+  <% end %>
+
 </div>
